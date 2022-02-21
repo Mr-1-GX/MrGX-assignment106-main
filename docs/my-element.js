@@ -103,6 +103,7 @@ export class MyElement extends LitElement {
       name: 'test',
       post: 'test Tweet'
     }]
+    this.tweetObject = {}
     //საჩვენებლად (უნდა შეარჩიოთ სწორი ფუნქცია, სწორი ადგილი "check"ის გამოსაძახებლად)
     // საჭიროებისთვის გაარჩიე then, catch და promise
     // check()
@@ -112,18 +113,20 @@ export class MyElement extends LitElement {
 
   nameInput(event){
     const value = event.target.value
-    console.log(value)
+    this.tweetObject.name = value
   }
   postInput(event){
     const value = event.target.value
-    console.log(value)
+    this.tweetObject.post = value
   }
 
   postTweet(){
+    var tweetNew = {...this.tweetObject};
+    this.tweets = [...this.tweets, tweetNew]
   }
 
   DeleteTweet(index){
-    console.log(index)
+    // console.log(index)
   }
 
 }
