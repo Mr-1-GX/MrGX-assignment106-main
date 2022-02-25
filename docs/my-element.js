@@ -60,14 +60,14 @@ export class MyElement extends LitElement {
       <div class='container'>
         <div class='left'>
           <span>          Name:
-          <input @input="${this.nameInput}">
+            <input @input="${this.nameInput}">
           </span>
           <span>
-          Post:
-          <textarea @input='${this.postInput}'></textarea>
+                             Post:
+            <textarea @input='${this.postInput}'></textarea>
           </span>
           <span >
-          <button @click='${this.postTweet}'>Tweet</button>
+            <button @click='${this.postTweet}'>Tweet</button>
           </span>
         </div>
         <div class='middle'>
@@ -99,34 +99,39 @@ export class MyElement extends LitElement {
 
   constructor() {
     super();
-    this.tweets = [{
-      name: 'test',
-      post: 'test Tweet'
-    }]
-    this.tweetObject = {}
-    //საჩვენებლად (უნდა შეარჩიოთ სწორი ფუნქცია, სწორი ადგილი "check"ის გამოსაძახებლად)
-    // საჭიროებისთვის გაარჩიე then, catch და promise
-    // check()
-    //   .then(r=> console.log(r))
-    //   .catch(r=> console.error(r))
+    this.tweets = loadFromStorage();
+    this.postCount = this.tweets.length;
   }
+  
+  
 
   nameInput(event){
     const value = event.target.value
-    this.tweetObject.name = value
+    this.tweets.name = value
   }
   postInput(event){
     const value = event.target.value
-    this.tweetObject.post = value
+    this.tweets.post = value
   }
 
+
+
   postTweet(){
-    var tweetNew = {...this.tweetObject};
-    this.tweets = [...this.tweets, tweetNew]
+    check()
+      .then((response)=> alert('დასრულდა ხოშიანად :D', response))
+      .catch((error)=> alert(error))
+    this.tweets = [...this.tweets, {...this.tweets}]
+    this.postCount = this.tweets.length
+    saveToStorage(this.tweets)
   }
 
   DeleteTweet(index){
-    // console.log(index)
+    check()
+      .then((response)=> alert('დასრულდა ხოშიანად :D', response))
+      .catch((error)=> alert(error))
+    this.tweet = this.tweets.splice(index, 1)
+    this.postCount = this.tweets.length
+    saveToStorage(this.tweets)
   }
 
 }
